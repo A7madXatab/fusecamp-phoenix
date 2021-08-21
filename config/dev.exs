@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :fusecamp_phoenix, FusecampPhoenix.Repo,
   username: "postgres",
-  password: "postgres",
+  password: "1234",
   database: "fusecamp_phoenix_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
