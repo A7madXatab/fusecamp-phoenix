@@ -5,7 +5,7 @@ defmodule FusecampPhoenix.Projects.Project do
   schema "projects" do
     field :description, :string
     field :name, :string
-    belongs_to :user, FusecampPhoenix.Accounts.User
+    has_many :privileges, FusecampPhoenix.Accounts.Privilege
 
     timestamps()
   end

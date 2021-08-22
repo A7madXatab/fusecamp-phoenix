@@ -8,6 +8,7 @@ defmodule FusecampPhoenix.Accounts.User do
     field :password, :string, virtual: true
     field :hashed_password, :string
     field :confirmed_at, :naive_datetime
+    has_many :privileges, FusecampPhoenix.Accounts.Privilege
 
     timestamps()
   end

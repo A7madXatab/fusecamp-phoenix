@@ -5,11 +5,8 @@ defmodule FusecampPhoenix.Repo.Migrations.CreateProjects do
     create table(:projects) do
       add :name, :string
       add :description, :text
-      add :user_id, references(:users, on_delete: :nothing)
 
       timestamps()
     end
-
-    create index(:projects, [:user_id])
   end
 end
