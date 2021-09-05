@@ -1,5 +1,8 @@
-<h1>New Project</h1>
+<div class="bg-white rounded-md self-center shadow p-2 w-7/12 flex flex-col justify-start items-center h-screen">
+    <img class="self-center mt-5 mb-1" width="100" height="100" src="https://bc3-production-assets-cdn.basecamp-static.com/assets/logos/paperclip-logo-349bf403c234be9d67457f2825054e138f6d54affe467717f3da909cab741cba.svg" alt="">
+    <h1 class="text-2xl text--darker font-medium self-center">
+        All right, let’s get your project started!
+    </h1>
 
-<%= render "form.html", Map.put(assigns, :action, Routes.project_path(@conn, :create)) %>
-
-<span><%= link "Back", to: Routes.project_path(@conn, :index) %></span>
+    <%= render "form.html", Map.put(assigns, :action, Routes.project_path(@conn, :create)) %>
+</div>

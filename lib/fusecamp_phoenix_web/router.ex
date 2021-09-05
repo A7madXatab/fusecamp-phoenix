@@ -73,5 +73,7 @@ defmodule FusecampPhoenixWeb.Router do
     get "/users/confirm", UserConfirmationController, :new
     post "/users/confirm", UserConfirmationController, :create
     get "/users/confirm/:token", UserConfirmationController, :confirm
+
+    resources "/projects", ProjectController
   end
 end

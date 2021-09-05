@@ -1,28 +1,33 @@
-<h1>Listing Projects</h1>
+<h1 class="mt-5 text-3xl text-center text--darker font-bold">Your Projects</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
+<div class="w-full flex flex-col items-center">
+  <main class="w-full md:w-4/12 flex flex-col justify-center my-2">
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for project <- @projects do %>
-    <tr>
-      <td><%= project.name %></td>
-      <td><%= project.description %></td>
+    <%= for project <- @projects do %>
+      <%= link to: Routes.project_path(@conn, :show, project), class: "nav-link" do %>
+      <div class="w-full bg-white rounded-md flex flex-col justify-between my-2 h-40 p-2 relative">
 
-      <td>
-        <span><%= link "Show", to: Routes.project_path(@conn, :show, project) %></span>
-        <span><%= link "Edit", to: Routes.project_path(@conn, :edit, project) %></span>
-        <span><%= link "Delete", to: Routes.project_path(@conn, :delete, project), method: :delete, data: [confirm: "Are you sure?"] %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
+          <header class="flex w-full justify-between items-start">
+              <div class="w-full">
+                  <h2 class="font-bold text--darker text-xl">
+                      <%= project.name %>
+                  </h2>
 
-<span><%= link "New Project", to: Routes.project_path(@conn, :new) %></span>
+              </div>
+          </header>
+
+          <footer>
+              <%= if @current_user do %>
+              <div class="rounded-full h-10 w-10">
+                  <%= @current_user.email %>
+              </div>
+              <% end %>
+          </footer>
+      </div>
+      <% end %>
+    <% end %>
+
+
+    <%= link "New project", to: "projects/new" %>
+  </main>
+</div>
