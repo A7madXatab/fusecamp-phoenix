@@ -7,6 +7,7 @@ defmodule FusecampPhoenix.Projects do
   alias FusecampPhoenix.Repo
 
   alias FusecampPhoenix.Projects.Project
+  alias FusecampPhoenix.Accounts.Privilege
 
   @doc """
   Returns the list of projects.
@@ -100,5 +101,13 @@ defmodule FusecampPhoenix.Projects do
   """
   def change_project(%Project{} = project, attrs \\ %{}) do
     Project.changeset(project, attrs)
+  end
+
+  def create_privilege(user, project, attrs \\ %{}) do
+    %Privilege{}
+    |>Privilege.changeset(attrs)
+    |>Ecto.Changeset.put_assoc(:user, user)
+    |>Ecto.Changeset.put_assoc(:project, project)
+    |>FusecampPhoenix.Repo.insert()
   end
 end

@@ -3,8 +3,8 @@ defmodule FusecampPhoenix.Accounts.Privilege do
   import Ecto.Changeset
 
   schema "privileges" do
-    field :user_id, :id
-    field :project_id, :id
+    belongs_to :user, FusecampPhoenix.Accounts.User
+    belongs_to :project, FusecampPhoenix.Projects.Project
 
     timestamps()
   end

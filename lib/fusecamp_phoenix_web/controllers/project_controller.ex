@@ -3,6 +3,7 @@ defmodule FusecampPhoenixWeb.ProjectController do
 
   alias FusecampPhoenix.Projects
   alias FusecampPhoenix.Projects.Project
+  alias FusecampPhoenix.Accounts.Privilege
 
   def index(conn, _params) do
     projects = Projects.list_projects()
@@ -17,6 +18,7 @@ defmodule FusecampPhoenixWeb.ProjectController do
   def create(conn, %{"project" => project_params}) do
     case Projects.create_project(project_params) do
       {:ok, project} ->
+        Projects.create_privilege(conn.assigns.current_user, project)
         conn
         |> put_flash(:info, "Project created successfully.")
         |> redirect(to: Routes.project_path(conn, :show, project))
