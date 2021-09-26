@@ -63,4 +63,65 @@ defmodule FusecampPhoenix.ProjectsTest do
       assert %Ecto.Changeset{} = Projects.change_project(project)
     end
   end
+
+  describe "todo_sets" do
+    alias FusecampPhoenix.Projects.TodoSet
+
+    @valid_attrs %{description: "some description", name: "some name"}
+    @update_attrs %{description: "some updated description", name: "some updated name"}
+    @invalid_attrs %{description: nil, name: nil}
+
+    def todo_set_fixture(attrs \\ %{}) do
+      {:ok, todo_set} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Projects.create_todo_set()
+
+      todo_set
+    end
+
+    test "list_todo_sets/0 returns all todo_sets" do
+      todo_set = todo_set_fixture()
+      assert Projects.list_todo_sets() == [todo_set]
+    end
+
+    test "get_todo_set!/1 returns the todo_set with given id" do
+      todo_set = todo_set_fixture()
+      assert Projects.get_todo_set!(todo_set.id) == todo_set
+    end
+
+    test "create_todo_set/1 with valid data creates a todo_set" do
+      assert {:ok, %TodoSet{} = todo_set} = Projects.create_todo_set(@valid_attrs)
+      assert todo_set.description == "some description"
+      assert todo_set.name == "some name"
+    end
+
+    test "create_todo_set/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Projects.create_todo_set(@invalid_attrs)
+    end
+
+    test "update_todo_set/2 with valid data updates the todo_set" do
+      todo_set = todo_set_fixture()
+      assert {:ok, %TodoSet{} = todo_set} = Projects.update_todo_set(todo_set, @update_attrs)
+      assert todo_set.description == "some updated description"
+      assert todo_set.name == "some updated name"
+    end
+
+    test "update_todo_set/2 with invalid data returns error changeset" do
+      todo_set = todo_set_fixture()
+      assert {:error, %Ecto.Changeset{}} = Projects.update_todo_set(todo_set, @invalid_attrs)
+      assert todo_set == Projects.get_todo_set!(todo_set.id)
+    end
+
+    test "delete_todo_set/1 deletes the todo_set" do
+      todo_set = todo_set_fixture()
+      assert {:ok, %TodoSet{}} = Projects.delete_todo_set(todo_set)
+      assert_raise Ecto.NoResultsError, fn -> Projects.get_todo_set!(todo_set.id) end
+    end
+
+    test "change_todo_set/1 returns a todo_set changeset" do
+      todo_set = todo_set_fixture()
+      assert %Ecto.Changeset{} = Projects.change_todo_set(todo_set)
+    end
+  end
 end

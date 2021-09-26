@@ -1,0 +1,27 @@
+<h1>Listing Todo sets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for todo_set <- @todo_sets do %>
+    <tr>
+      <td><%= todo_set.name %></td>
+      <td><%= todo_set.description %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.todo_set_path(@conn, :show, todo_set) %></span>
+        <span><%= link "Edit", to: Routes.todo_set_path(@conn, :edit, todo_set) %></span>
+        <span><%= link "Delete", to: Routes.todo_set_path(@conn, :delete, todo_set), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
