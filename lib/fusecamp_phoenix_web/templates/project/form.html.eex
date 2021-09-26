@@ -15,7 +15,11 @@
 
 <footer class="flex justify-center mt-2">
     <button type="submit" class="rounded-full p-2 text-white bg--green focus:outline-none focus:shadow-outline hover:bg-green-500">
-        Create this project
+    <%= if @changeset.data.id do %>
+     Update this project
+    <% else %>
+     Create project
+    <% end %>
     </button>
 </footer>
 <% end %>
